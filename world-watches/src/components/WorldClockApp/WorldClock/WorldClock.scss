@@ -1,0 +1,46 @@
+.clock-item {
+  --br: 4px;
+
+  position: relative;
+
+  padding: 24px;
+
+  background-color: #2c2c2c;
+  border: 1px solid #414141;
+  border-radius: var(--br);
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  &__name {
+    color: #949494;
+    font-style: italic;
+  }
+
+  &__time-display {
+    font-size: 1.7rem;
+  }
+
+  &__actions {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+  }
+
+  &__delete-btn {
+    --size: 24px;
+
+    width: var(--size);
+    height: var(--size);
+
+    background-color: #464646;
+    border-radius: var(--br);
+
+    &:hover {
+      background-color: #fa493c;
+    }
+  }
+}

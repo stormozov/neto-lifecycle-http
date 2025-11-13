@@ -1,0 +1,39 @@
+.world-clock-form {
+  display: flex;
+  align-items: end;
+  gap: 1em;
+
+  &__input-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__label {
+    color: #949494;
+  }
+
+  &__required {
+    margin-left: 0.2em;
+    color: #8086ff;
+  }
+
+  &__input {
+    padding: 0.571em 0.857em;
+    height: 40px;
+    border: 1px solid #949494;
+    border-radius: 4px;
+  }
+}
+
+.add-clock-btn {
+  background-color: #646cff;
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #949494;
+  }
+
+  &:not(:disabled):hover {
+    background-color: #535bf2;
+  }
+}

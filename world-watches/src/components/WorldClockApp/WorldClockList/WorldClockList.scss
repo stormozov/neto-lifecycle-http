@@ -1,0 +1,15 @@
+.clock-list {
+  margin-top: 36px;
+
+  &.list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+}

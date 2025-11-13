@@ -1,5 +1,6 @@
 import type { IClock, IWithDelete } from "@/components/WorldClockApp";
 import { WorldClock } from "@/components/WorldClockApp";
+import classnames from "classnames";
 import "./WorldClockList.scss";
 
 /**
@@ -7,6 +8,7 @@ import "./WorldClockList.scss";
  */
 export interface IWorldClockListProps extends IWithDelete {
   clocks: IClock[];
+  classes?: string | string[];
 }
 
 /**
@@ -18,10 +20,12 @@ export interface IWorldClockListProps extends IWithDelete {
  */
 const WorldClockList: React.FC<IWorldClockListProps> = ({ 
   clocks, 
+  classes, 
   onDelete 
 }) => {
+  const classList = classes instanceof Array ? classes : [classes];
   return (
-    <ul className="clock-list list">
+    <ul className={classnames("clock-list", ...classList)}>
       {clocks.length === 0 ? (
         <li className="clock-list__item">
           <p className="empty-message">

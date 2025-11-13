@@ -1,0 +1,14 @@
+.world-clock-change-display {
+  display: block;
+
+  margin-left: auto;
+  margin-bottom: 0.7rem;
+
+  font-size: 1.5rem;
+  line-height: 0;
+
+  &:hover {
+    transform: rotate(10deg);
+    color: #8086ff;
+  }
+}

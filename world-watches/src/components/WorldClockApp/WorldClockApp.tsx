@@ -1,5 +1,5 @@
-import type { ClockId, IClock } from "@/components/WorldClockApp";
-import { AddClockForm, WorldClockList } from "@/components/WorldClockApp";
+import type { ClockId, DisplayClockList, IClock } from "@/components/WorldClockApp";
+import { AddClockForm, WorldClockChange, WorldClockList } from "@/components/WorldClockApp";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import "./WorldClockApp.scss";
@@ -13,6 +13,7 @@ import "./WorldClockApp.scss";
  */
 const WorldClockApp = () => {
   const [clocks, setClocks] = useState<IClock[]>([]);
+  const [displayClocks, setDisplayClocks] = useState<DisplayClockList>("list");
 
   const addClock = (city: string, offset: number) => {
     const newClock: IClock = { id: uuidv4(), city, offset };
@@ -22,12 +23,24 @@ const WorldClockApp = () => {
   const deleteClock = (id: ClockId) => {
     setClocks((prev) => prev.filter((clock) => clock.id !== id));
   };
+
+  const changeDisplay = () => {
+    setDisplayClocks(displayClocks === "list" ? "grid" : "list");
+  };
   
   return (
     <div className="world-clock-app">
       <div className="world-clock">
         <AddClockForm onAdd={addClock} />
-        <WorldClockList clocks={clocks} onDelete={deleteClock} />
+        <WorldClockChange 
+          displayType={displayClocks} 
+          changeDisplay={() => changeDisplay()} 
+        />
+        <WorldClockList 
+          clocks={clocks} 
+          classes={displayClocks} 
+          onDelete={deleteClock} 
+        />
       </div>
     </div>
   )

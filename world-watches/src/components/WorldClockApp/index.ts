@@ -9,6 +9,10 @@ export type * from "./WorldClockForm/WorldClockForm";
 export { default as AddClockForm } from "./AddClockForm/AddClockForm";
 export type * from "./AddClockForm/AddClockForm";
 
+// Экспорт из WorldClockChange
+export { default as WorldClockChange } from "./WorldClockChange/WorldClockChange";
+export type * from "./WorldClockChange/WorldClockChange";
+
 // Экспорт из WorldClockList
 export { default as WorldClockList } from "./WorldClockList/WorldClockList";
 export type * from "./WorldClockList/WorldClockList";

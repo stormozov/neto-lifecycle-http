@@ -1,3 +1,4 @@
+import { AnalogClock } from "@/components/AnalogClock";
 import { calculateTimeForTimeZone, formatTime } from "@/utils/timeUtils";
 import React from "react";
 import "./WorldClock.scss";
@@ -13,7 +14,7 @@ import type { IWorldClockProps, WorldClockState } from "./types";
 export default class WorldClock 
   extends React.Component<IWorldClockProps, WorldClockState> {
   private _timerId: number | null = null;
-  private _intervalId: number = 1000;
+  private readonly _intervalId: number = 1000;
 
   constructor(props: IWorldClockProps) {
     super(props);
@@ -81,10 +82,13 @@ export default class WorldClock
 
     return (
       <div className="clock-item">
+        <AnalogClock time={time} />
+
         <div className="clock-item__content">
           <span className="clock-item__name">{clock.city}</span>
           <span className="clock-item__time-display">{formatTime(time)}</span>
         </div>
+        
         <div className="clock-item__actions">
           <button 
             className="clock-item__delete-btn"

@@ -3,11 +3,21 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+
+    .clock-item {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
   }
 
   &.grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0.5rem;
+
+    .analog-clock {
+      margin-bottom: 1rem;
+    }
   }
 }

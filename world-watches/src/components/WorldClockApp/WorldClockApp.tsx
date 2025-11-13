@@ -1,5 +1,9 @@
-import type { ClockId, DisplayClockList, IClock } from "@/components/WorldClockApp";
-import { AddClockForm, WorldClockChange, WorldClockList } from "@/components/WorldClockApp";
+import type {
+  ClockId, DisplayClockList, IClock
+} from "@/components/WorldClockApp";
+import {
+  AddClockForm, WorldClockChange, WorldClockList
+} from "@/components/WorldClockApp";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import "./WorldClockApp.scss";
@@ -32,10 +36,14 @@ const WorldClockApp = () => {
     <div className="world-clock-app">
       <div className="world-clock">
         <AddClockForm onAdd={addClock} />
-        <WorldClockChange 
-          displayType={displayClocks} 
-          changeDisplay={() => changeDisplay()} 
-        />
+
+        {clocks.length > 0 && (
+          <WorldClockChange 
+            displayType={displayClocks} 
+            changeDisplay={() => changeDisplay()} 
+          />
+        )}
+        
         <WorldClockList 
           clocks={clocks} 
           classes={displayClocks} 

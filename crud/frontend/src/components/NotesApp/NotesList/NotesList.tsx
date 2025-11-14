@@ -1,4 +1,4 @@
-import type { INote } from "@components/NotesApp";
+import type { INote, INoteAttrs } from "@components/NotesApp";
 import { NotesItem } from "@components/NotesApp";
 import type { FC } from "react";
 import "./NotesList.scss";
@@ -7,17 +7,18 @@ import "./NotesList.scss";
  * Интерфейс, описывающий пропсы компонента NotesList
  */
 export interface INotesListProps {
+  itemAttrs: INoteAttrs;
   notes: INote[];
 }
 
 /**
  * Компонент NotesList, отображающий список заметок
  */
-const NotesList: FC<INotesListProps> = ({ notes }) => {
+const NotesList: FC<INotesListProps> = ({ itemAttrs, notes }) => {
   const renderNotes = () => (
     notes.map((note) => (
       <li key={note.id} className="notes-list__item">
-        <NotesItem note={note} />
+        <NotesItem attrs={itemAttrs} note={note} />
       </li>
     ))
   );

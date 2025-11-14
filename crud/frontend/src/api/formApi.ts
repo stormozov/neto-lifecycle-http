@@ -19,7 +19,7 @@ export const getNotes = async (): Promise<INote[]> => {
 /**
  * Отправляет POST запрос на сервер с данными формы
  */
-export const sendForm = async (data: FormData): Promise<INote | null> => {
+export const sendNote = async (data: FormData): Promise<INote | null> => {
   try {
     const response = await fetch(`${URL}/notes`, {
       method: "POST",
@@ -30,5 +30,19 @@ export const sendForm = async (data: FormData): Promise<INote | null> => {
   } catch (error) {
     console.error("Failed to send form:", error);
     return null;
+  }
+};
+
+/**
+ * Отправляет DELETE запрос на сервер по ID заметки
+ */
+export const deleteNote = async (id: number): Promise<boolean> => {
+  try {
+    const response = await fetch(`${URL}/notes/${id}`, { method: "DELETE" });
+    if (response.status !== 204) throw new Error(response.statusText);
+    return true;
+  } catch (error) {
+    console.error("Failed to delete note:", error);
+    return false;
   }
 };

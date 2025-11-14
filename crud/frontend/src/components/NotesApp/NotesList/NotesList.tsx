@@ -15,25 +15,13 @@ export interface INotesListProps {
  * Компонент NotesList, отображающий список заметок
  */
 const NotesList: FC<INotesListProps> = ({ itemAttrs, notes }) => {
-  const renderNotes = () => (
-    notes.map((note) => (
-      <li key={note.id} className="notes-list__item">
-        <NotesItem attrs={itemAttrs} note={note} />
-      </li>
-    ))
-  );
-
-  const renderEmpty = () => (
-    <li className="notes-list__item">
-      <p className="notes-list__empty">
-        Ваш список заметок пуст. Пора добавить что-нибудь!
-      </p>
-    </li>
-  );
-
   return (
     <ul className="notes-list">
-      {notes.length > 0 ? renderNotes() : renderEmpty()}
+      {notes.map((note) => (
+        <li key={note.id} className="notes-list__item">
+          <NotesItem attrs={itemAttrs} note={note} />
+        </li>
+      ))}
     </ul>
   );
 };

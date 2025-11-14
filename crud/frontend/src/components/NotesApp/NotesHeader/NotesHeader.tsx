@@ -9,6 +9,7 @@ import NotesHeaderIconBtn from "./NotesHeaderIconBtn";
  * Интерфейс, описывающий пропсы компонента NotesHeader
  */
 export interface INotesHeaderProps {
+  notesLength: number;
   updateHandler: () => void;
   handleDelete: HandleNoteDelete;
 }
@@ -17,6 +18,7 @@ export interface INotesHeaderProps {
  * Компонент, отображающий шапку приложения NotesApp
  */
 const NotesHeader: FC<INotesHeaderProps> = ({ 
+  notesLength,
   updateHandler, 
   handleDelete 
 }) => {
@@ -36,6 +38,7 @@ const NotesHeader: FC<INotesHeaderProps> = ({
           className="notes-header__btn--delete-all"
           title="Удалить все заметки"
           onClick={() => handleDelete("all")}
+          disabled={!notesLength}
         >
         </NotesHeaderIconBtn>
       </div>

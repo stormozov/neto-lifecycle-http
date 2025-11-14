@@ -1,9 +1,10 @@
 import { deleteAllNotes, deleteNote, getNotes, sendNote } from "@api/formApi";
 import type { DeleteNoteAction, INote } from "@components/NotesApp";
-import { NotesForm, NotesHeader, NotesList } from "@components/NotesApp";
+import { NotesForm, NotesHeader } from "@components/NotesApp";
 import placeholders from "@data/placeholders.json";
 import { useEffect, useState } from "react";
 import "./NotesApp.scss";
+import NotesListView from "./NotesList/NotesListView";
 
 /**
  * Основной компонент приложения заметок.
@@ -67,10 +68,11 @@ const NotesApp = () => {
     <div className="notes-app">
       <div className="container">
         <NotesHeader 
+          notesLength={notes.length}
           updateHandler={updateNotesList} 
           handleDelete={handleDelete}
         />
-        <NotesList itemAttrs={{ handleDelete }} notes={notes} />
+        <NotesListView itemAttrs={{ handleDelete }} notes={notes} />
         <NotesForm
           value={textareaValue}
           placeholders={placeholders}

@@ -31,6 +31,20 @@ app.post("/notes", upload.none(), (req, res) => {
 });
 
 /**
+ * DELETE /notes
+ */
+app.delete("/notes", (req, res) => {
+  if (notes.length === 0) {
+    res.status(204).end();
+  } else {
+    notes.length = 0;
+    nextId = 1;
+    
+    res.status(204).end();
+  }
+});
+
+/**
  * DELETE /notes/:id
  */
 app.delete("/notes/:id", (req, res) => {

@@ -22,14 +22,14 @@ export interface INotesItemProps {
  */
 const NotesItem: FC<INotesItemProps> = ({ note }) => {
   return (
-    <>
-      <div className="note-content">
-        <p>{note.text}</p>
+    <div className="note">
+      <div className="note__content">
+        <p className="note__text">{note.text}</p>
       </div>
-      <div className="note-actions">
-        <button className="note-delete"><FaTimes /></button>
+      <div className="note__actions">
+        <button className="note__btn note__btn--delete"><FaTimes /></button>
       </div>
-    </>
+    </div>
   )
 };
 

@@ -43,6 +43,7 @@ const NotesForm: FC<INotesFormProps> = ({
             id="notes-textarea"
             rows={2}
             value={textareaValue}
+            maxLength={500}
             onChange={(e) => onChange(e.target.value)}
             required
           ></textarea>

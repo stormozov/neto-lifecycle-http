@@ -1,5 +1,5 @@
-import { deleteNote, getNotes, sendNote } from "@api/formApi";
-import type { INote } from "@components/NotesApp";
+import { deleteAllNotes, deleteNote, getNotes, sendNote } from "@api/formApi";
+import type { DeleteNoteAction, INote } from "@components/NotesApp";
 import { NotesForm, NotesHeader, NotesList } from "@components/NotesApp";
 import placeholders from "@data/placeholders.json";
 import { useEffect, useState } from "react";
@@ -43,20 +43,34 @@ const NotesApp = () => {
     }
   };
 
-  const onDelete = async (id: number) => {
-    if (!window.confirm("Вы действительно хотите удалить заметку?")) return;
+  const handleDelete = async (action: DeleteNoteAction, id?: number) => {
+    if (notes.length === 0) return;
 
-    const isDeleted = await deleteNote(id);
+    const isSingle = action === "single";
+
+    const confirmMessage = isSingle
+      ? "Вы действительно хотите удалить заметку?"
+      : "Вы действительно хотите удалить все заметки?";
+
+    if (!window.confirm(confirmMessage)) return;
+
+    const isDeleted = isSingle
+      ? await deleteNote(id!)
+      : await deleteAllNotes();
+
     if (!isDeleted) return;
 
-    setNotes(notes.filter((note) => note.id !== id));
+    setNotes((prev) => isSingle ? prev.filter((note) => note.id !== id) : []);
   };
 
   return (
     <div className="notes-app">
       <div className="container">
-        <NotesHeader updateHandler={updateNotesList} />
-        <NotesList itemAttrs={{ onDelete }} notes={notes} />
+        <NotesHeader 
+          updateHandler={updateNotesList} 
+          handleDelete={handleDelete}
+        />
+        <NotesList itemAttrs={{ handleDelete }} notes={notes} />
         <NotesForm
           value={textareaValue}
           placeholders={placeholders}

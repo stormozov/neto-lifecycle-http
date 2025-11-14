@@ -46,3 +46,17 @@ export const deleteNote = async (id: number): Promise<boolean> => {
     return false;
   }
 };
+
+/**
+ * Отправляет DELETE запрос на сервер для удаления всех заметок
+ */
+export const deleteAllNotes = async (): Promise<boolean> => {
+  try {
+    const response = await fetch(`${URL}/notes`, { method: "DELETE" });
+    if (response.status !== 204) throw new Error(response.statusText);
+    return true;
+  } catch (error) {
+    console.error("Failed to delete all notes:", error);
+    return false;
+  }
+};

@@ -18,14 +18,34 @@
     font-size: inherit;
     line-height: 0;
 
+    &--update {
+      &:not(:disabled) {
+        &:hover,
+        &:focus-visible
+        {
+          background-color: #adff2f;
+          color: #3e3e3e;
+        }
+      }
+    }
+
+    &--delete-all {
+      &:not(:disabled) {
+        &:hover,
+        &:focus-visible
+        {
+          background-color: #ff2f2f;
+          color: #242424;
+        }
+      }
+    }
+
     &:not(:disabled) {
       &:hover,
       &:focus-visible
       {
         transform: rotate(360deg);
-        background-color: #adff2f;
         outline: transparent;
-        color: #3e3e3e;
       }
     }
   }

@@ -1,21 +1,7 @@
 import type { FC } from "react";
 import { FaTimes } from "react-icons/fa";
 import "./NotesItem.scss";
-
-/**
- * Интерфейс, описывающий объект заметки
- */
-export interface INote {
-  id: number;
-  text: string;
-}
-
-/**
- * Интерфейс, описывающий атрибуты для компонента NotesItem
- */
-export interface INoteAttrs {
-  onDelete: (id: number) => void;
-}
+import type { INote, INoteAttrs } from "./types";
 
 /**
  * Интерфейс, описывающий пропсы компонента NotesItem
@@ -40,7 +26,7 @@ const NotesItem: FC<INotesItemProps> = ({ attrs, note }) => {
           className="note__btn note__btn--delete"
           title="Удалить заметку"
           aria-label="Удалить заметку"
-          onClick={() => attrs?.onDelete(note.id)}
+          onClick={() => attrs?.handleDelete("single", note.id)}
         >
           <FaTimes />
         </button>

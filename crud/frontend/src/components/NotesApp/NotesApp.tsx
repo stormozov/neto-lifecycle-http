@@ -25,6 +25,12 @@ const NotesApp = () => {
     fetchNotes();
   }, []);
 
+  const updateNotesList = async () => {
+    const notesData = await getNotes();
+    setNotes(notesData);
+    setTextareaValue('');
+  };
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -49,7 +55,7 @@ const NotesApp = () => {
   return (
     <div className="notes-app">
       <div className="container">
-        <NotesHeader />
+        <NotesHeader updateHandler={updateNotesList} />
         <NotesList itemAttrs={{ onDelete }} notes={notes} />
         <NotesForm
           value={textareaValue}

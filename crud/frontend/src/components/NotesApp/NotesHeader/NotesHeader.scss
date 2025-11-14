@@ -1,0 +1,32 @@
+.notes-header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-size: 1rem;
+
+  &__actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__btn {
+    padding: 10px;
+
+    background-color: #3e3e3e;
+    border-radius: 100%;
+
+    font-size: inherit;
+    line-height: 0;
+
+    &:not(:disabled) {
+      &:hover,
+      &:focus-visible
+      {
+        transform: rotate(360deg);
+        background-color: #adff2f;
+        outline: transparent;
+        color: #3e3e3e;
+      }
+    }
+  }
+}

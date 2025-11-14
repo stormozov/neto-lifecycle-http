@@ -1,24 +1,12 @@
-import bodyParser from "body-parser";
 import cors from "cors";
 import express from "express";
+import multer from "multer";
 
 const app = express();
+const upload = multer(); 
 
 // MIDDLEWARE
 app.use(cors());
-
-app.use(
-  bodyParser.json({
-    type(req) {
-      return true;
-    },
-  })
-);
-
-app.use(function (req, res, next) {
-  res.setHeader('Content-Type', 'application/json');
-  next();
-});
 
 const notes = [];
 let nextId = 1;
@@ -29,16 +17,17 @@ let nextId = 1;
  * GET /notes
  */
 app.get("/notes", (req, res) => {
-  res.send(JSON.stringify(notes));
+  res.json(notes);
 });
 
 /**
  * POST /notes
  */
-app.post("/notes", (req, res) => {
-  notes.push({ ...req.body, id: nextId++ });
-  res.status(204);
-  res.end();
+app.post("/notes", upload.none(), (req, res) => {
+  const newNote = { ...req.body, id: nextId++ };
+  notes.push(newNote);
+
+  res.status(201).json(newNote);
 });
 
 /**
@@ -49,8 +38,7 @@ app.delete("/notes/:id", (req, res) => {
   const index = notes.findIndex((o) => o.id === noteId);
   if (index !== -1) notes.splice(index, 1);
 
-  res.status(204);
-  res.end();
+  res.status(204).end();
 });
 
 // START SERVER

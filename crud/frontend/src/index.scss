@@ -33,6 +33,12 @@ button {
   }
 }
 
+ul,
+ol
+{
+  list-style: none;
+}
+
 .container {
   padding: 0 24px;
   margin: 0 auto;

@@ -1,4 +1,5 @@
-import { useEffect, useState, type FC } from "react";
+import { useRotatingPlaceholder } from "@hooks/index";
+import { type FC } from "react";
 import { IoSend } from "react-icons/io5";
 import "./NotesForm.scss";
 
@@ -6,37 +7,31 @@ import "./NotesForm.scss";
  * Интерфейс, описывающий пропсы компонента NotesForm
  */
 export interface INotesFormProps {
+  value: string;
   placeholders: string[];
+  onChange: (value: string) => void;
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
 /**
  * Компонент NotesForm, отображающий форму для создания новых заметок
  */
-const NotesForm: FC<INotesFormProps> = ({ placeholders }) => {
-  const [textareaValue, setTextareaValue] = useState<string>('');
-  const [
-    currentPlaceholderIndex, setCurrentPlaceholderIndex
-  ] = useState<number>(0);
-
-  const PLACEHOLDER_INTERVAL = 3000;
-  const PLACEHOLDER_LENGTH = placeholders.length;
-  
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentPlaceholderIndex((prev) => (prev + 1) % PLACEHOLDER_LENGTH);
-    }, PLACEHOLDER_INTERVAL);
-
-    return () => clearInterval(interval);
-  }, [PLACEHOLDER_LENGTH]);
-
-  const currentPlaceholder = placeholders[currentPlaceholderIndex];
-
-  // Проверяем, пусто ли поле — тогда показываем кастомный placeholder
-  const showPlaceholder = !textareaValue;
+const NotesForm: FC<INotesFormProps> = ({ 
+  value: textareaValue,
+  onChange,
+  onSubmit, 
+  placeholders 
+}) => {
+  const { 
+    currentPlaceholder, showPlaceholder 
+  } = useRotatingPlaceholder(placeholders);
 
   return (
     <div className="notes-form-container">
-      <form className="notes-form d-flex flex-align-end gap-4">
+      <form 
+        onSubmit={onSubmit} 
+        className="notes-form d-flex flex-align-end gap-4"
+      >
         <div className="notes-form__group notes-form__group--relative">
           <label className="notes-form__label" htmlFor="notes-textarea">
             Новая заметка *
@@ -44,15 +39,15 @@ const NotesForm: FC<INotesFormProps> = ({ placeholders }) => {
 
           <textarea
             className="notes-form__textarea"
-            name="notes-textarea"
+            name="text"
             id="notes-textarea"
             rows={2}
             value={textareaValue}
-            onChange={(e) => setTextareaValue(e.target.value)}
+            onChange={(e) => onChange(e.target.value)}
             required
           ></textarea>
 
-          {showPlaceholder && (
+          {showPlaceholder(textareaValue) && (
             <div className="notes-form__custom-placeholder">
               {currentPlaceholder}
             </div>

@@ -11,9 +11,12 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@/components/*": ["src/components/*"],
-      "@/utils/*": ["src/utils/*"],
-      "@/data/*": ["src/data/*"],
+      "@components/*": ["src/components/*"],
+      "@utils/*": ["src/utils/*"],
+      "@data/*": ["src/data/*"],
+      "@api/*": ["src/api/*"],
+      "@assets/*": ["src/assets/*"],
+      "@hooks/*": ["src/hooks/*"],
     },
 
     /* Bundler mode */
